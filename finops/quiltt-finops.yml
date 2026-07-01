@@ -1,0 +1,101 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Quiltt
+providerId: quiltt
+created: '2026-07-01'
+modified: '2026-07-01'
+reconciled: false
+tags:
+- Fintech
+- Open Banking
+- Financial Data
+- Aggregation
+- GraphQL
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Quiltt spend. Quiltt bills on a tiered, connection-metered
+  model that abstracts underlying aggregator costs (Plaid, MX, Finicity)
+  behind a single platform. The primary cost driver is the number of active
+  production Connections and the set of enabled aggregator providers; sandbox
+  usage is free. Exact per-connection rates are not published publicly.
+notes: >-
+  Quiltt does not expose full per-connection dollar rates publicly; verify
+  against the Quiltt pricing page and your agreement during reconciliation.
+sources:
+- https://www.quiltt.io/pricing
+- https://www.quiltt.dev
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Quiltt
+serviceCategory: Financial Data and Open Banking
+billingModel:
+  pricingCategory: Tiered plus Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Quiltt Platform
+  ServiceCategory: Financial Data and Open Banking
+  ProviderName: Quiltt
+  PublisherName: Quiltt
+  InvoiceIssuerName: Quiltt
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: active_connections
+  description: Active production Connections billed per connection per period.
+  unit: connections
+  aggregation: sum
+  dimensions:
+  - environment
+  - provider
+- name: enabled_providers
+  description: Aggregator providers (Plaid, MX, Finicity) enabled for the environment.
+  unit: providers
+  aggregation: count
+  dimensions:
+  - environment
+  - provider
+- name: profiles
+  description: End-user Profiles under management.
+  unit: profiles
+  aggregation: count
+  dimensions:
+  - environment
+- name: graphql_requests
+  description: GraphQL Data API requests against the unified financial data graph.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - environment
+- name: session_tokens_issued
+  description: Session tokens issued per Profile (rate-limited, not directly billed).
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - environment
+  - profile
+principles:
+- name: Visibility
+  description: Track active Connections and enabled providers per environment; connections are the dominant cost driver.
+- name: Allocation
+  description: Tag Profiles and Connections to internal customers/teams via metadata; map to cost centers.
+- name: Optimization
+  description: Disconnect stale Connections, enable only the aggregator providers you need, and cache session tokens to stay within issuance limits.
+- name: Accountability
+  description: Review connection counts and provider mix monthly against budget and negotiated volume terms.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

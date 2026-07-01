@@ -1,0 +1,133 @@
+aid: quiltt
+url: https://raw.githubusercontent.com/api-evangelist/quiltt/refs/heads/main/apis.yml
+name: Quiltt
+kind: company
+description: Quiltt is a fintech data platform and abstraction layer over open-banking
+  aggregators like Plaid, MX, and Finicity. It exposes a unified GraphQL API for reading
+  end-user financial data (profiles, connections, accounts, balances, transactions,
+  investment holdings, statements) plus a REST Admin/Auth API for profiles, connections,
+  session tokens, and webhooks, and an embeddable Connector UI for account linking.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Fintech
+- Open Banking
+- Financial Data
+- Aggregation
+- GraphQL
+created: '2026-07-01'
+modified: '2026-07-01'
+specificationVersion: '0.19'
+apis:
+- aid: quiltt:quiltt-graphql-data-api
+  name: Quiltt GraphQL Data API
+  tags:
+  - GraphQL
+  - Financial Data
+  - Accounts
+  - Transactions
+  - Connections
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.quiltt.dev/api/graphql
+  baseURL: https://api.quiltt.io/v1/graphql
+  properties:
+  - url: https://www.quiltt.dev/api/graphql
+    type: Documentation
+  - url: https://www.quiltt.dev/api-reference/graphql
+    type: APIReference
+  - url: graphql/quiltt-graphql.md
+    type: GraphQL
+  - url: graphql/quiltt-schema.graphql
+    type: GraphQL
+  description: Single GraphQL endpoint for reading an end-user's unified financial
+    data - Profile, Connections, Accounts, Balances, Account Owners and Numbers,
+    Transactions, Investment Holdings, and Statements - authenticated with a Bearer
+    session token. Supports queries, mutations, and subscriptions.
+- aid: quiltt:quiltt-profiles-api
+  name: Quiltt Profiles API
+  tags:
+  - Profiles
+  - Users
+  - Admin
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.quiltt.dev/api/profiles
+  baseURL: https://api.quiltt.io/v1
+  properties:
+  - url: https://www.quiltt.dev/api/profiles
+    type: Documentation
+  - url: openapi/quiltt-openapi.yml
+    type: OpenAPI
+  description: REST Admin endpoints to list, create, retrieve, update, and delete
+    Profiles - the container for an end-user's identity (name, email, phone,
+    birthday, address, custom metadata) and their linked financial Connections.
+- aid: quiltt:quiltt-connections-api
+  name: Quiltt Connections API
+  tags:
+  - Connections
+  - Aggregators
+  - Admin
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.quiltt.dev/api/core-resources/connections
+  baseURL: https://api.quiltt.io/v1
+  properties:
+  - url: https://www.quiltt.dev/api/core-resources/connections
+    type: Documentation
+  - url: openapi/quiltt-openapi.yml
+    type: OpenAPI
+  description: REST Admin endpoints to list, retrieve, and manage a Profile's
+    Connections - the links to underlying aggregator sources (Plaid Item, MX Member,
+    Finicity Institution Login) that back the accounts and transactions surfaced
+    through the GraphQL API.
+- aid: quiltt:quiltt-session-tokens-api
+  name: Quiltt Session Tokens API
+  tags:
+  - Authentication
+  - Session Tokens
+  - Auth
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.quiltt.dev/authentication/issuing-session-tokens
+  baseURL: https://auth.quiltt.io/v1
+  properties:
+  - url: https://www.quiltt.dev/authentication/issuing-session-tokens
+    type: Documentation
+  - url: https://www.quiltt.dev/authentication/managing-session-tokens
+    type: Documentation
+  - url: openapi/quiltt-openapi.yml
+    type: OpenAPI
+  description: REST Auth endpoints to issue, verify, and revoke short-lived JWT
+    session tokens scoped to a single Profile. Session tokens authenticate the
+    Connector and end-user calls to the GraphQL Data API.
+- aid: quiltt:quiltt-webhooks-api
+  name: Quiltt Webhooks API
+  tags:
+  - Webhooks
+  - Events
+  - Real Time
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.quiltt.dev/webhooks
+  baseURL: https://api.quiltt.io/v1
+  properties:
+  - url: https://www.quiltt.dev/webhooks
+    type: Documentation
+  - url: openapi/quiltt-openapi.yml
+    type: OpenAPI
+  description: REST Admin endpoints to create, list, retrieve, and delete webhook
+    subscriptions that deliver real-time events such as profile.created,
+    connection.synced.successful, and account.verified to your endpoints.
+common:
+- type: GitHubOrganization
+  url: https://github.com/quiltt
+- type: LinkedIn
+  url: https://www.linkedin.com/company/quiltt
+- type: Website
+  url: https://www.quiltt.io/
+- type: Documentation
+  url: https://www.quiltt.dev
+- type: Plans
+  url: plans/quiltt-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/quiltt-rate-limits.yml
+- type: FinOps
+  url: finops/quiltt-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

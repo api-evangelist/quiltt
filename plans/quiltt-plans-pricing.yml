@@ -1,0 +1,114 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Quiltt
+providerId: quiltt
+created: '2026-07-01'
+modified: '2026-07-01'
+reconciled: false
+tags:
+- Fintech
+- Open Banking
+- Financial Data
+- Aggregation
+- GraphQL
+- Plans
+description: >-
+  Quiltt offers tiered plans that abstract underlying aggregator costs (Plaid,
+  MX, Finicity) behind Quiltt's unified GraphQL + REST platform. A self-serve
+  Free/Sandbox tier lets developers build against the Connector and APIs, a
+  Growth tier adds production connections and providers on a metered basis, and
+  Enterprise adds volume commitments, additional providers, and negotiated
+  terms. Published, per-connection dollar figures are not exposed publicly; the
+  values below capture the plan structure honestly and defer exact rates to the
+  Quiltt pricing page and sales.
+notes: >-
+  Quiltt does not publish full per-connection pricing on its public site;
+  confirm exact tier rates on the pricing page and via sales during
+  reconciliation.
+sources:
+- https://www.quiltt.io/pricing
+- https://www.quiltt.dev
+plans:
+- id: quiltt-free
+  name: Free / Sandbox
+  type: free
+  description: >-
+    Self-serve tier for building and testing against the Quiltt Connector,
+    GraphQL Data API, and REST Admin/Auth API in a sandbox environment.
+  entries:
+  - label: Sandbox Connections
+    name: sandbox_connections
+    type: free
+    metric: connections
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free in sandbox
+    userMultiplied: false
+  elements:
+  - name: Connector (embedded UI)
+  - name: GraphQL Data API
+  - name: REST Admin & Auth API
+  - name: Webhooks
+- id: quiltt-growth
+  name: Growth
+  type: usage
+  description: >-
+    Production tier with metered live Connections across enabled providers
+    (Plaid, MX, Finicity), self-serve provider enablement from the Dashboard,
+    and standard support.
+  entries:
+  - label: Active Connections
+    name: active_connections
+    type: usage
+    metric: connections
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: metered per active connection - see pricing page
+    userMultiplied: true
+  - label: Additional Providers
+    name: additional_providers
+    type: usage
+    metric: providers
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: enable additional aggregators from the Dashboard
+    userMultiplied: false
+  elements:
+  - name: Production Connections
+  - name: Multiple Aggregator Providers
+  - name: Transactions & Balances
+  - name: Investment Holdings
+  - name: Statements
+  - name: Webhooks
+- id: quiltt-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Volume commitments, all providers, custom data retention, dedicated
+    support, SLAs, and negotiated terms. Contact Quiltt sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: All Aggregator Providers
+  - name: Dedicated Support & SLAs
+  - name: Custom Data Retention
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

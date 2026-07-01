@@ -1,0 +1,325 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quiltt Admin & Auth REST API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{apiSecretKey}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quiltt.io/v1/profiles"
+          },
+          "docs": "Retrieve a paginated list of Profiles."
+        },
+        {
+          "info": {
+            "name": "Create Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.quiltt.io/v1/profiles",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"uuid\": \"\",\n  \"name\": \"\",\n  \"email\": \"\",\n  \"metadata\": {}\n}"
+            }
+          },
+          "docs": "Create a new Profile."
+        },
+        {
+          "info": {
+            "name": "Get Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The Profile ID or your UUID."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Profile."
+        },
+        {
+          "info": {
+            "name": "Update Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The Profile ID or your UUID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\n  \"email\": \"\",\n  \"metadata\": {}\n}"
+            }
+          },
+          "docs": "Update an existing Profile."
+        },
+        {
+          "info": {
+            "name": "Delete Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The Profile ID or your UUID."
+              }
+            ]
+          },
+          "docs": "Permanently delete a Profile."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId/connections",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List the Connections belonging to a Profile."
+        },
+        {
+          "info": {
+            "name": "Get Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId/connections/:connectionId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Connection."
+        },
+        {
+          "info": {
+            "name": "Delete Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId/connections/:connectionId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disconnect and remove a Connection, stopping data syncs."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Session Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Issue Session Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://auth.quiltt.io/v1/users/sessions",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"userId\": \"\",\n  \"uuid\": \"\",\n  \"email\": \"\",\n  \"metadata\": {}\n}"
+            }
+          },
+          "docs": "Issue a Profile-scoped JWT session token. Rate limited to 10/hour, 20/day per Profile."
+        },
+        {
+          "info": {
+            "name": "Verify Session Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://auth.quiltt.io/v1/users/session"
+          },
+          "docs": "Verify a session token (pass the session token as the Bearer credential)."
+        },
+        {
+          "info": {
+            "name": "Revoke Session Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://auth.quiltt.io/v1/users/sessions/revoke"
+          },
+          "docs": "Revoke a session token (pass the token to revoke as the Bearer credential)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Webhook Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quiltt.io/v1/webhooks"
+          },
+          "docs": "List webhook subscriptions."
+        },
+        {
+          "info": {
+            "name": "Create Webhook Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.quiltt.io/v1/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"url\": \"\",\n  \"events\": [\"profile.created\", \"connection.synced.successful\", \"account.verified\"]\n}"
+            }
+          },
+          "docs": "Create a webhook subscription for real-time events."
+        },
+        {
+          "info": {
+            "name": "Get Webhook Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quiltt.io/v1/webhooks/:webhookId",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a webhook subscription."
+        },
+        {
+          "info": {
+            "name": "Delete Webhook Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.quiltt.io/v1/webhooks/:webhookId",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a webhook subscription."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "GraphQL Data API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query Profile Financial Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.quiltt.io/v1/graphql",
+            "auth": {
+              "type": "bearer",
+              "token": "{{sessionToken}}"
+            },
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"query { profile { id accounts { id name balance { current currencyCode } transactions { nodes { id amount date description entryType status } } } } }\"\n}"
+            }
+          },
+          "docs": "Read the authenticated Profile's accounts, balances, and transactions. Authenticated with a Bearer session token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,63 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Quiltt
+providerId: quiltt
+created: '2026-07-01'
+modified: '2026-07-01'
+reconciled: false
+tags:
+- Fintech
+- Open Banking
+- Financial Data
+- Aggregation
+- GraphQL
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Quiltt enforces rate limits across its surfaces. The most explicitly
+  documented limit is on Session Token issuance, capped per Profile at 10 per
+  hour and 20 per day; revoked tokens are freed and do not count. The GraphQL
+  Data API and REST Admin API also apply per-environment throttling that is
+  not published as fixed numeric values. Clients should cache session tokens
+  (valid ~24 hours) and back off on throttling.
+notes: >-
+  Only the session-token issuance limit is publicly documented as a fixed
+  value; confirm GraphQL and Admin API limits with Quiltt during
+  reconciliation.
+sources:
+- https://www.quiltt.dev/authentication/issuing-session-tokens
+- https://www.quiltt.dev/authentication/managing-session-tokens
+- https://www.quiltt.dev/api/graphql
+responseCodes:
+  throttled: 429
+limits:
+- name: Session Tokens Per Hour
+  scope: profile
+  metric: tokens
+  limit: 10
+  notes: Session tokens issued per Profile per hour. Revoked tokens are freed.
+- name: Session Tokens Per Day
+  scope: profile
+  metric: tokens
+  limit: 20
+  notes: Session tokens issued per Profile per day. Revoked tokens are freed.
+- name: GraphQL Data API
+  scope: environment
+  metric: requests
+  limit: see provider documentation
+  notes: Per-environment throttling on the GraphQL endpoint; values not published.
+- name: REST Admin API
+  scope: environment
+  metric: requests
+  limit: see provider documentation
+  notes: Per-environment throttling on Admin endpoints; values not published.
+policies:
+- name: Token Caching
+  description: Cache session tokens client-side (valid ~24 hours) and check expiration before reissuing to avoid the per-Profile issuance limit.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 429 responses and honor any Retry-After header.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

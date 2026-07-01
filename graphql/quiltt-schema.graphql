@@ -1,0 +1,313 @@
+"""
+Quiltt GraphQL Data API Schema
+Representative schema of the real Quiltt GraphQL API served at
+https://api.quiltt.io/v1/graphql. Queries operate on the authenticated
+Profile (via a Bearer session token) and read the end-user's unified
+financial data: Connections, Accounts, Balances, Owners, Numbers,
+Transactions, Investment Holdings, and Statements. Field names follow
+Quiltt's published schema.
+"""
+
+# ─────────────────────────────────────────────
+# Scalars
+# ─────────────────────────────────────────────
+
+scalar JSON
+scalar Date
+scalar DateTime
+scalar Decimal
+
+# ─────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────
+
+enum ConnectionProvider {
+  PLAID
+  MX
+  FINICITY
+  MASTERCARD
+}
+
+enum ConnectionStatus {
+  INITIALIZING
+  SYNCING
+  SYNCED
+  DISCONNECTED
+  ERROR_REPAIRABLE
+  ERROR_SERVICE
+  ERROR_INSTITUTION
+}
+
+enum AccountState {
+  OPEN
+  CLOSED
+  UNKNOWN
+}
+
+enum TransactionEntryType {
+  CREDIT
+  DEBIT
+}
+
+enum TransactionStatus {
+  PENDING
+  POSTED
+}
+
+enum AccountKind {
+  CHECKING
+  SAVINGS
+  CREDIT_CARD
+  LOAN
+  MORTGAGE
+  INVESTMENT
+  BROKERAGE
+  RETIREMENT
+  OTHER
+}
+
+# ─────────────────────────────────────────────
+# Core Entity Types
+# ─────────────────────────────────────────────
+
+type Profile {
+  id: ID!
+  uuid: String
+  name: String
+  email: String
+  phone: String
+  birthday: Date
+  address: Address
+  metadata: JSON
+  connections: [Connection!]!
+  accounts: [Account!]!
+  transactions(filter: TransactionFilter): TransactionConnection!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Address {
+  line1: String
+  line2: String
+  city: String
+  state: String
+  postalCode: String
+  country: String
+}
+
+type Connection {
+  id: ID!
+  provider: ConnectionProvider!
+  status: ConnectionStatus!
+  institution: Institution
+  accounts: [Account!]!
+  products: [String!]
+  oauth: Boolean
+  externallyManaged: Boolean
+  metadata: JSON
+  remoteData: JSON
+  at: DateTime
+}
+
+type Institution {
+  id: ID
+  name: String!
+  logo: String
+  website: String
+}
+
+type Account {
+  id: ID!
+  name: String!
+  kind: AccountKind
+  taxonomy: String
+  mask: String
+  currencyCode: String!
+  state: AccountState
+  verified: Boolean!
+  balance: Balance
+  connection: Connection!
+  institution: Institution
+  provider: ConnectionProvider!
+  owners: [AccountOwner!]!
+  numbers: AccountNumbers
+  transactions(filter: TransactionFilter): TransactionConnection!
+  holdings: [Holding!]!
+  statements: [Statement!]!
+  transactedFirstOn: Date
+  transactedLastOn: Date
+  metadata: JSON
+  remoteData: JSON
+  at: DateTime
+}
+
+type Balance {
+  at: DateTime
+  available: Decimal
+  current: Decimal
+  limit: Decimal
+  currencyCode: String!
+}
+
+type AccountOwner {
+  id: ID!
+  names: [String!]!
+  emails: [String!]
+  phones: [String!]
+  addresses: [Address!]
+}
+
+type AccountNumbers {
+  accountNumber: String
+  routingNumber: String
+}
+
+type Transaction {
+  id: ID!
+  account: Account!
+  amount: Decimal!
+  currencyCode: String!
+  date: Date!
+  description: String
+  entryType: TransactionEntryType!
+  status: TransactionStatus!
+  kind: String
+  category: String
+  logo: String
+  provider: ConnectionProvider!
+  metadata: JSON
+  remoteData: JSON
+}
+
+type TransactionConnection {
+  nodes: [Transaction!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type Holding {
+  id: ID!
+  account: Account!
+  security: Security
+  quantity: Decimal
+  price: Decimal
+  value: Decimal
+  costBasis: Decimal
+  currencyCode: String!
+  at: DateTime
+}
+
+type Security {
+  id: ID!
+  name: String
+  ticker: String
+  cusip: String
+  isin: String
+  type: String
+}
+
+type Statement {
+  id: ID!
+  account: Account!
+  periodStart: Date
+  periodEnd: Date
+  url: String
+  createdAt: DateTime!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ─────────────────────────────────────────────
+# Input Types
+# ─────────────────────────────────────────────
+
+input TransactionFilter {
+  from: Date
+  to: Date
+  accountId: ID
+  entryType: TransactionEntryType
+  status: TransactionStatus
+  search: String
+  first: Int
+  after: String
+}
+
+input ConnectionUpdateInput {
+  id: ID!
+  metadata: JSON
+}
+
+# ─────────────────────────────────────────────
+# Mutation Payloads
+# ─────────────────────────────────────────────
+
+type ConnectionMutationPayload {
+  success: Boolean!
+  record: Connection
+  errors: [MutationError!]
+}
+
+type MutationError {
+  message: String!
+  path: [String!]
+  code: String
+}
+
+# ─────────────────────────────────────────────
+# Query Root
+# ─────────────────────────────────────────────
+
+type Query {
+  "The authenticated end-user Profile."
+  profile: Profile
+
+  "List the Profile's Connections."
+  connections: [Connection!]!
+
+  "Retrieve a single Connection by ID."
+  connection(id: ID!): Connection
+
+  "List the Profile's Accounts."
+  accounts: [Account!]!
+
+  "Retrieve a single Account by ID."
+  account(id: ID!): Account
+
+  "List the Profile's Transactions, with optional filtering and pagination."
+  transactions(filter: TransactionFilter): TransactionConnection!
+
+  "Retrieve a single Transaction by ID."
+  transaction(id: ID!): Transaction
+
+  "List Investment Holdings across the Profile's Accounts."
+  holdings(accountId: ID): [Holding!]!
+
+  "List Account Statements."
+  statements(accountId: ID): [Statement!]!
+}
+
+# ─────────────────────────────────────────────
+# Mutation Root
+# ─────────────────────────────────────────────
+
+type Mutation {
+  "Disconnect a Connection from its provider, stopping data syncs."
+  connectionDisconnect(id: ID!): ConnectionMutationPayload!
+
+  "Update a Connection's metadata."
+  connectionUpdate(input: ConnectionUpdateInput!): ConnectionMutationPayload!
+}
+
+# ─────────────────────────────────────────────
+# Subscription Root
+# ─────────────────────────────────────────────
+
+type Subscription {
+  "Emitted when a Connection completes a data sync."
+  connectionSynced(connectionId: ID): Connection!
+}

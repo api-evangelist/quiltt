@@ -1,0 +1,95 @@
+aid: quiltt
+name: Quiltt
+review:
+  question: Does Quiltt expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-01'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Quiltt delivers real-time updates two ways: HTTP webhooks (server-to-server
+    callbacks) and GraphQL Subscriptions (e.g. connectionSynced). GraphQL
+    Subscriptions run over the GraphQL transport rather than a documented raw
+    WebSocket surface that Quiltt asks integrators to open directly. No
+    standalone AsyncAPI document was authored; the event surface is captured in
+    the GraphQL schema (Subscription root) and the webhook event catalog in the
+    OpenAPI/README. Revisit if Quiltt publishes an explicit WebSocket endpoint.
+findings:
+  summary: |
+    Quiltt does not publish a documented public raw WebSocket (ws:// or wss://)
+    API for integrators to connect to directly. Quiltt is a hybrid platform: a
+    GraphQL Data API (POST https://api.quiltt.io/v1/graphql) for reading
+    end-user financial data, and REST Admin/Auth APIs
+    (https://api.quiltt.io/v1 and https://auth.quiltt.io/v1) for Profiles,
+    Connections, Session Tokens, and Webhooks. Real-time signals are delivered
+    as (1) HTTP webhooks and (2) GraphQL Subscriptions surfaced through the
+    GraphQL API. No dedicated, separately documented WebSocket endpoint is
+    published.
+  transports:
+    - protocol: GraphQL
+      scheme: https
+      baseURL: https://api.quiltt.io/v1/graphql
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.quiltt.io/v1
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://auth.quiltt.io/v1
+      documented: true
+      note: Auth host for session-token issuance, verification, and revocation.
+    - protocol: Webhooks
+      scheme: https
+      documented: true
+      note: Server-to-server HTTP callbacks for events like profile.created, connection.synced.successful, account.verified. Not WebSocket.
+    - protocol: GraphQL Subscriptions
+      scheme: https
+      documented: true
+      note: Real-time GraphQL subscriptions (e.g. connectionSynced) over the GraphQL transport. No separately documented raw WebSocket endpoint.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No standalone WebSocket endpoint is documented in Quiltt's API reference as of the review date.
+  endpointsConfirmedGraphql:
+    - POST https://api.quiltt.io/v1/graphql
+  endpointsConfirmedRest:
+    - GET    https://api.quiltt.io/v1/profiles
+    - POST   https://api.quiltt.io/v1/profiles
+    - GET    https://api.quiltt.io/v1/profiles/{profileId}
+    - PATCH  https://api.quiltt.io/v1/profiles/{profileId}
+    - DELETE https://api.quiltt.io/v1/profiles/{profileId}
+    - GET    https://api.quiltt.io/v1/profiles/{profileId}/connections
+    - GET    https://api.quiltt.io/v1/profiles/{profileId}/connections/{connectionId}
+    - DELETE https://api.quiltt.io/v1/profiles/{profileId}/connections/{connectionId}
+    - GET    https://api.quiltt.io/v1/webhooks
+    - POST   https://api.quiltt.io/v1/webhooks
+    - GET    https://api.quiltt.io/v1/webhooks/{webhookId}
+    - DELETE https://api.quiltt.io/v1/webhooks/{webhookId}
+    - POST   https://auth.quiltt.io/v1/users/sessions
+    - GET    https://auth.quiltt.io/v1/users/session
+    - POST   https://auth.quiltt.io/v1/users/sessions/revoke
+sources:
+  - url: https://www.quiltt.dev/api/graphql
+    type: Documentation
+    note: GraphQL endpoint https://api.quiltt.io/v1/graphql; Bearer/Basic auth; queries, mutations, subscriptions.
+  - url: https://www.quiltt.dev/api-reference/rest
+    type: APIReference
+    note: REST Admin/Auth reference; all documented transactional endpoints are HTTPS REST.
+  - url: https://www.quiltt.dev/authentication/issuing-session-tokens
+    type: Documentation
+    note: Session tokens issued via POST https://auth.quiltt.io/v1/users/sessions; verify/revoke on the same host.
+  - url: https://www.quiltt.dev/webhooks
+    type: Documentation
+    note: Real-time events delivered as HTTP webhooks (profile.created, connection.synced.successful.*, account.verified), not WebSocket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No documented raw WebSocket surface exists. Real-time delivery is via HTTP
+    webhooks and GraphQL Subscriptions, both captured through existing
+    artifacts (OpenAPI webhook event catalog and the GraphQL schema Subscription
+    root), so no AsyncAPI document was authored.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

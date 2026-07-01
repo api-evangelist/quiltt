@@ -1,0 +1,358 @@
+{
+  "info": {
+    "_postman_id": "b3d9a2f4-6c81-4e2a-9f10-7a5c2e8d41ab",
+    "name": "Quiltt Admin & Auth REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Quiltt Admin & Auth REST API - Profiles, Connections, Session Tokens, and Webhooks. End-user financial data is read via the GraphQL Data API at https://api.quiltt.io/v1/graphql.\n\nContact Support:\n Name: Quiltt Support\n Email: support@quiltt.io",
+      "type": "text/plain"
+    }
+  },
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.quiltt.io",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://auth.quiltt.io",
+      "key": "authUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{apiSecretKey}}"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Profiles",
+      "item": [
+        {
+          "name": "List Profiles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/profiles",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "profiles"]
+            },
+            "description": "Retrieve a paginated list of Profiles."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"metadata\": {}\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/profiles",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "profiles"]
+            },
+            "description": "Create a new Profile."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/profiles/:profileId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "profiles", ":profileId"],
+              "variable": [
+                { "key": "profileId", "value": "", "description": "The Profile ID or your UUID." }
+              ]
+            },
+            "description": "Retrieve a specific Profile."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"metadata\": {}\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/profiles/:profileId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "profiles", ":profileId"],
+              "variable": [
+                { "key": "profileId", "value": "", "description": "The Profile ID or your UUID." }
+              ]
+            },
+            "description": "Update an existing Profile."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Profile",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/profiles/:profileId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "profiles", ":profileId"],
+              "variable": [
+                { "key": "profileId", "value": "", "description": "The Profile ID or your UUID." }
+              ]
+            },
+            "description": "Permanently delete a Profile."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Connections",
+      "item": [
+        {
+          "name": "List Connections",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/profiles/:profileId/connections",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "profiles", ":profileId", "connections"],
+              "variable": [
+                { "key": "profileId", "value": "" }
+              ]
+            },
+            "description": "List the Connections belonging to a Profile."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Connection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/profiles/:profileId/connections/:connectionId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "profiles", ":profileId", "connections", ":connectionId"],
+              "variable": [
+                { "key": "profileId", "value": "" },
+                { "key": "connectionId", "value": "" }
+              ]
+            },
+            "description": "Retrieve a specific Connection."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Connection",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/profiles/:profileId/connections/:connectionId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "profiles", ":profileId", "connections", ":connectionId"],
+              "variable": [
+                { "key": "profileId", "value": "" },
+                { "key": "connectionId", "value": "" }
+              ]
+            },
+            "description": "Disconnect and remove a Connection, stopping data syncs."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Session Tokens",
+      "item": [
+        {
+          "name": "Issue Session Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"uuid\": \"<string>\",\n  \"email\": \"<string>\",\n  \"metadata\": {}\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{authUrl}}/v1/users/sessions",
+              "host": ["{{authUrl}}"],
+              "path": ["v1", "users", "sessions"]
+            },
+            "description": "Issue a Profile-scoped JWT session token. Rate limited to 10/hour, 20/day per Profile."
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Session Token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{sessionToken}}" }]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{authUrl}}/v1/users/session",
+              "host": ["{{authUrl}}"],
+              "path": ["v1", "users", "session"]
+            },
+            "description": "Verify a session token (pass the session token as the Bearer credential)."
+          },
+          "response": []
+        },
+        {
+          "name": "Revoke Session Token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{sessionToken}}" }]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{authUrl}}/v1/users/sessions/revoke",
+              "host": ["{{authUrl}}"],
+              "path": ["v1", "users", "sessions", "revoke"]
+            },
+            "description": "Revoke a session token (pass the token to revoke as the Bearer credential)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "List Webhook Subscriptions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/webhooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "webhooks"]
+            },
+            "description": "List webhook subscriptions."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Webhook Subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\"profile.created\", \"connection.synced.successful\", \"account.verified\"]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/webhooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "webhooks"]
+            },
+            "description": "Create a webhook subscription for real-time events."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Webhook Subscription",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/webhooks/:webhookId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "webhooks", ":webhookId"],
+              "variable": [
+                { "key": "webhookId", "value": "" }
+              ]
+            },
+            "description": "Retrieve a webhook subscription."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Webhook Subscription",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/webhooks/:webhookId",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "webhooks", ":webhookId"],
+              "variable": [
+                { "key": "webhookId", "value": "" }
+              ]
+            },
+            "description": "Delete a webhook subscription."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "GraphQL Data API",
+      "item": [
+        {
+          "name": "Query Profile Financial Data",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{sessionToken}}" }]
+            },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query {\n  profile {\n    id\n    accounts {\n      id\n      name\n      balance { current currencyCode }\n      transactions {\n        nodes { id amount date description entryType status }\n      }\n    }\n  }\n}",
+                "variables": "{}"
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/graphql",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "graphql"]
+            },
+            "description": "Read the authenticated Profile's accounts, balances, and transactions. Authenticated with a Bearer session token."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
