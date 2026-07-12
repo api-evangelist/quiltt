@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/quiltt-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: apiSecretKey
+  type: http
+  scheme: bearer
+  description: Your Quiltt API Secret Key used for Admin and token-issuance calls.
+  sources:
+  - openapi/quiltt-openapi.yml

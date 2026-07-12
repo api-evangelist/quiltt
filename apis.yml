@@ -114,6 +114,10 @@ apis:
     subscriptions that deliver real-time events such as profile.created,
     connection.synced.successful, and account.verified to your endpoints.
 common:
+- type: DomainSecurity
+  url: security/quiltt-domain-security.yml
+- type: Authentication
+  url: authentication/quiltt-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/quiltt
 - type: LinkedIn
@@ -128,6 +132,8 @@ common:
   url: rate-limits/quiltt-rate-limits.yml
 - type: FinOps
   url: finops/quiltt-finops.yml
+- url: https://www.quiltt.io/blog
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
