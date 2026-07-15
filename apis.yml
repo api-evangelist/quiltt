@@ -114,6 +114,8 @@ apis:
     subscriptions that deliver real-time events such as profile.created,
     connection.synced.successful, and account.verified to your endpoints.
 common:
+- type: AgenticAccess
+  url: agentic-access/quiltt-agentic-access.yml
 - type: DomainSecurity
   url: security/quiltt-domain-security.yml
 - type: Authentication
