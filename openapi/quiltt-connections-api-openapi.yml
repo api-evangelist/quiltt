@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  title: Quiltt Admin & Auth REST Connections API
+  description: Quiltt is a hybrid API platform. This REST specification covers the administrative and authentication surfaces used to manage Profiles, Connections, Session Tokens, and Webhooks. End-user financial data (accounts, balances, transactions, holdings, statements) is read through the separate GraphQL Data API at https://api.quiltt.io/v1/graphql. Admin endpoints are authenticated with your Quiltt API Secret Key (Bearer). Session Token endpoints live on the auth host.
+  termsOfService: https://www.quiltt.io/legal/terms
+  contact:
+    name: Quiltt Support
+    url: https://www.quiltt.dev
+    email: support@quiltt.io
+  version: '1.0'
+servers:
+- url: https://api.quiltt.io/v1
+  description: Admin API (Profiles, Connections, Webhooks)
+- url: https://auth.quiltt.io/v1
+  description: Auth API (Session Tokens)
+security:
+- apiSecretKey: []
+tags:
+- name: Connections
+  description: Manage a Profile's aggregator Connections.
+paths:
+  /profiles/{profileId}/connections:
+    parameters:
+    - name: profileId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: listConnections
+      tags:
+      - Connections
+      summary: List Connections
+      description: List the Connections belonging to a Profile.
+      responses:
+        '200':
+          description: A list of Connections.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connections:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Connection'
+  /profiles/{profileId}/connections/{connectionId}:
+    parameters:
+    - name: profileId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: connectionId
+      in: path
+      required: true
+      description: The Connection ID.
+      schema:
+        type: string
+    get:
+      operationId: getConnection
+      tags:
+      - Connections
+      summary: Get Connection
+      responses:
+        '200':
+          description: The requested Connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '404':
+          description: Connection not found.
+    delete:
+      operationId: deleteConnection
+      tags:
+      - Connections
+      summary: Delete Connection
+      description: Disconnect and remove a Connection, stopping Quiltt from syncing data from the underlying aggregator source.
+      responses:
+        '204':
+          description: Connection deleted.
+components:
+  schemas:
+    Connection:
+      type: object
+      properties:
+        id:
+          type: string
+        provider:
+          type: string
+          enum:
+          - PLAID
+          - MX
+          - FINICITY
+          - MASTERCARD
+          description: The underlying aggregator source.
+        status:
+          type: string
+          enum:
+          - INITIALIZING
+          - SYNCING
+          - SYNCED
+          - DISCONNECTED
+          - ERROR_REPAIRABLE
+          - ERROR_SERVICE
+          - ERROR_INSTITUTION
+          description: Sync status of the Connection.
+        institution:
+          type: object
+          properties:
+            name:
+              type: string
+            logo:
+              type: string
+        externallyManaged:
+          type: boolean
+        metadata:
+          type: object
+          additionalProperties: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiSecretKey:
+      type: http
+      scheme: bearer
+      description: Your Quiltt API Secret Key used for Admin and token-issuance calls.
+    sessionToken:
+      type: http
+      scheme: bearer
+      description: A Profile-scoped JWT session token.

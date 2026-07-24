@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: Quiltt Admin & Auth REST Connections Webhooks API
+  description: Quiltt is a hybrid API platform. This REST specification covers the administrative and authentication surfaces used to manage Profiles, Connections, Session Tokens, and Webhooks. End-user financial data (accounts, balances, transactions, holdings, statements) is read through the separate GraphQL Data API at https://api.quiltt.io/v1/graphql. Admin endpoints are authenticated with your Quiltt API Secret Key (Bearer). Session Token endpoints live on the auth host.
+  termsOfService: https://www.quiltt.io/legal/terms
+  contact:
+    name: Quiltt Support
+    url: https://www.quiltt.dev
+    email: support@quiltt.io
+  version: '1.0'
+servers:
+- url: https://api.quiltt.io/v1
+  description: Admin API (Profiles, Connections, Webhooks)
+- url: https://auth.quiltt.io/v1
+  description: Auth API (Session Tokens)
+security:
+- apiSecretKey: []
+tags:
+- name: Webhooks
+  description: Manage webhook subscriptions for real-time events.
+paths:
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      tags:
+      - Webhooks
+      summary: List Webhook Subscriptions
+      responses:
+        '200':
+          description: A list of webhook subscriptions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webhooks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Webhook'
+    post:
+      operationId: createWebhook
+      tags:
+      - Webhooks
+      summary: Create Webhook Subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookInput'
+      responses:
+        '201':
+          description: The created webhook subscription.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+  /webhooks/{webhookId}:
+    parameters:
+    - name: webhookId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getWebhook
+      tags:
+      - Webhooks
+      summary: Get Webhook Subscription
+      responses:
+        '200':
+          description: The requested webhook subscription.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+    delete:
+      operationId: deleteWebhook
+      tags:
+      - Webhooks
+      summary: Delete Webhook Subscription
+      responses:
+        '204':
+          description: Webhook subscription deleted.
+components:
+  schemas:
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+          example:
+          - profile.created
+          - connection.synced.successful
+          - account.verified
+        enabled:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+    WebhookInput:
+      type: object
+      required:
+      - url
+      - events
+      properties:
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+            - profile.created
+            - connection.synced.successful
+            - connection.synced.successful.initial
+            - connection.synced.successful.historical
+            - connection.synced.errored.repairable
+            - account.verified
+  securitySchemes:
+    apiSecretKey:
+      type: http
+      scheme: bearer
+      description: Your Quiltt API Secret Key used for Admin and token-issuance calls.
+    sessionToken:
+      type: http
+      scheme: bearer
+      description: A Profile-scoped JWT session token.

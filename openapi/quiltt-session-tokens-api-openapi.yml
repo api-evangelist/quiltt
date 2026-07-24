@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: Quiltt Admin & Auth REST Connections Session Tokens API
+  description: Quiltt is a hybrid API platform. This REST specification covers the administrative and authentication surfaces used to manage Profiles, Connections, Session Tokens, and Webhooks. End-user financial data (accounts, balances, transactions, holdings, statements) is read through the separate GraphQL Data API at https://api.quiltt.io/v1/graphql. Admin endpoints are authenticated with your Quiltt API Secret Key (Bearer). Session Token endpoints live on the auth host.
+  termsOfService: https://www.quiltt.io/legal/terms
+  contact:
+    name: Quiltt Support
+    url: https://www.quiltt.dev
+    email: support@quiltt.io
+  version: '1.0'
+servers:
+- url: https://api.quiltt.io/v1
+  description: Admin API (Profiles, Connections, Webhooks)
+- url: https://auth.quiltt.io/v1
+  description: Auth API (Session Tokens)
+security:
+- apiSecretKey: []
+tags:
+- name: Session Tokens
+  description: Issue, verify, and revoke Profile-scoped session tokens.
+paths:
+  /users/sessions:
+    post:
+      operationId: issueSessionToken
+      tags:
+      - Session Tokens
+      summary: Issue Session Token
+      description: Issue a Profile-scoped JWT session token. Authenticated with your API Secret Key. Served from https://auth.quiltt.io/v1. Rate limited to 10 per hour and 20 per day per Profile.
+      servers:
+      - url: https://auth.quiltt.io/v1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionTokenInput'
+      responses:
+        '201':
+          description: The issued session token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionToken'
+        '429':
+          description: Session token rate limit exceeded for this Profile.
+  /users/session:
+    get:
+      operationId: verifySessionToken
+      tags:
+      - Session Tokens
+      summary: Verify Session Token
+      description: Verify a session token. Pass the session token itself as the Bearer credential. Served from https://auth.quiltt.io/v1.
+      servers:
+      - url: https://auth.quiltt.io/v1
+      security:
+      - sessionToken: []
+      responses:
+        '200':
+          description: The token is valid; returns its claims.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionToken'
+        '401':
+          description: The token is invalid, revoked, or expired.
+  /users/sessions/revoke:
+    post:
+      operationId: revokeSessionToken
+      tags:
+      - Session Tokens
+      summary: Revoke Session Token
+      description: Revoke a session token. Pass the token to revoke as the Bearer credential. Served from https://auth.quiltt.io/v1.
+      servers:
+      - url: https://auth.quiltt.io/v1
+      security:
+      - sessionToken: []
+      responses:
+        '200':
+          description: The token was revoked.
+components:
+  schemas:
+    SessionToken:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The JWT session token.
+        userId:
+          type: string
+        environmentId:
+          type: string
+        expiration:
+          type: integer
+          description: Unix timestamp when the token expires.
+        expiresAt:
+          type: string
+          format: date-time
+    SessionTokenInput:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: An existing Profile ID to scope the token to.
+        uuid:
+          type: string
+          description: Your external identifier; creates a Profile if none exists.
+        email:
+          type: string
+          format: email
+        metadata:
+          type: object
+          additionalProperties: true
+  securitySchemes:
+    apiSecretKey:
+      type: http
+      scheme: bearer
+      description: Your Quiltt API Secret Key used for Admin and token-issuance calls.
+    sessionToken:
+      type: http
+      scheme: bearer
+      description: A Profile-scoped JWT session token.

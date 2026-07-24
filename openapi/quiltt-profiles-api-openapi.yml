@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: Quiltt Admin & Auth REST Connections Profiles API
+  description: Quiltt is a hybrid API platform. This REST specification covers the administrative and authentication surfaces used to manage Profiles, Connections, Session Tokens, and Webhooks. End-user financial data (accounts, balances, transactions, holdings, statements) is read through the separate GraphQL Data API at https://api.quiltt.io/v1/graphql. Admin endpoints are authenticated with your Quiltt API Secret Key (Bearer). Session Token endpoints live on the auth host.
+  termsOfService: https://www.quiltt.io/legal/terms
+  contact:
+    name: Quiltt Support
+    url: https://www.quiltt.dev
+    email: support@quiltt.io
+  version: '1.0'
+servers:
+- url: https://api.quiltt.io/v1
+  description: Admin API (Profiles, Connections, Webhooks)
+- url: https://auth.quiltt.io/v1
+  description: Auth API (Session Tokens)
+security:
+- apiSecretKey: []
+tags:
+- name: Profiles
+  description: Manage end-user Profiles.
+paths:
+  /profiles:
+    get:
+      operationId: listProfiles
+      tags:
+      - Profiles
+      summary: List Profiles
+      description: Retrieve a paginated list of Profiles in the environment.
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      responses:
+        '200':
+          description: A list of Profiles.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profiles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Profile'
+    post:
+      operationId: createProfile
+      tags:
+      - Profiles
+      summary: Create Profile
+      description: Create a new Profile.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileInput'
+      responses:
+        '201':
+          description: The created Profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+  /profiles/{profileId}:
+    parameters:
+    - name: profileId
+      in: path
+      required: true
+      description: The Profile ID (e.g. p_17KTMuJseY4Cx2LcbgKA7wU) or your UUID.
+      schema:
+        type: string
+    get:
+      operationId: getProfile
+      tags:
+      - Profiles
+      summary: Get Profile
+      responses:
+        '200':
+          description: The requested Profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '404':
+          description: Profile not found.
+    patch:
+      operationId: updateProfile
+      tags:
+      - Profiles
+      summary: Update Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileInput'
+      responses:
+        '200':
+          description: The updated Profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+    delete:
+      operationId: deleteProfile
+      tags:
+      - Profiles
+      summary: Delete Profile
+      description: Permanently delete a Profile and its associated data.
+      responses:
+        '204':
+          description: Profile deleted.
+components:
+  schemas:
+    ProfileInput:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        birthday:
+          type: string
+          format: date
+        address:
+          type: object
+          additionalProperties: true
+        metadata:
+          type: object
+          additionalProperties: true
+    Profile:
+      type: object
+      properties:
+        id:
+          type: string
+          example: p_17KTMuJseY4Cx2LcbgKA7wU
+        uuid:
+          type: string
+          description: Your own external identifier for the Profile.
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        birthday:
+          type: string
+          format: date
+        address:
+          type: object
+          additionalProperties: true
+        metadata:
+          type: object
+          additionalProperties: true
+          description: Arbitrary key-value data you store on the Profile.
+        connectionIds:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiSecretKey:
+      type: http
+      scheme: bearer
+      description: Your Quiltt API Secret Key used for Admin and token-issuance calls.
+    sessionToken:
+      type: http
+      scheme: bearer
+      description: A Profile-scoped JWT session token.
