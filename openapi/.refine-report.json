@@ -1,0 +1,20 @@
+{
+  "provider": "quiltt",
+  "sources": [
+    "quiltt-connections-api-openapi.yml",
+    "quiltt-profiles-api-openapi.yml",
+    "quiltt-session-tokens-api-openapi.yml",
+    "quiltt-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "quiltt-connections-api-openapi.yml",
+    "quiltt-profiles-api-openapi.yml",
+    "quiltt-session-tokens-api-openapi.yml",
+    "quiltt-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
