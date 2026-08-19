@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quiltt Admin & Auth REST Connections Profiles API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quiltt.io/v1/profiles",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of Profiles in the environment."
+        },
+        {
+          "info": {
+            "name": "Create Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.quiltt.io/v1/profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Profile."
+        },
+        {
+          "info": {
+            "name": "Get Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The Profile ID (e.g. p_17KTMuJseY4Cx2LcbgKA7wU) or your UUID."
+              }
+            ]
+          },
+          "docs": "Get Profile"
+        },
+        {
+          "info": {
+            "name": "Update Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The Profile ID (e.g. p_17KTMuJseY4Cx2LcbgKA7wU) or your UUID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Profile"
+        },
+        {
+          "info": {
+            "name": "Delete Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The Profile ID (e.g. p_17KTMuJseY4Cx2LcbgKA7wU) or your UUID."
+              }
+            ]
+          },
+          "docs": "Permanently delete a Profile and its associated data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

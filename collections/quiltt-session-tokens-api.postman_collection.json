@@ -1,0 +1,430 @@
+{
+  "item": [
+    {
+      "id": "58a5f6a2-972a-4c41-a36f-81ee86eb7eae",
+      "name": "Session Tokens",
+      "description": {
+        "content": "Issue, verify, and revoke Profile-scoped session tokens.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec9e2ffa-094d-4ff3-bdf3-6a658b40e0fc",
+          "name": "Issue Session Token",
+          "request": {
+            "name": "Issue Session Token",
+            "description": {
+              "content": "Issue a Profile-scoped JWT session token. Authenticated with your API Secret Key. Served from https://auth.quiltt.io/v1. Rate limited to 10 per hour and 20 per day per Profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v1",
+                "users",
+                "sessions"
+              ],
+              "host": [
+                "auth",
+                "quiltt",
+                "io"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"uuid\": \"<string>\",\n  \"email\": \"<email>\",\n  \"metadata\": {\n    \"key_0\": 2925.0744901305693,\n    \"key_1\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2baaf242-5312-4b05-82fc-8f9c511ce832",
+              "name": "The issued session token.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "users",
+                    "sessions"
+                  ],
+                  "host": [
+                    "auth",
+                    "quiltt",
+                    "io"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"<string>\",\n  \"uuid\": \"<string>\",\n  \"email\": \"<email>\",\n  \"metadata\": {\n    \"key_0\": 6682,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"userId\": \"string\",\n  \"environmentId\": \"string\",\n  \"expiration\": 501,\n  \"expiresAt\": \"2009-04-01T14:31:33.755Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e67919c-caab-45eb-8bcb-376565795aa1",
+              "name": "Session token rate limit exceeded for this Profile.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "users",
+                    "sessions"
+                  ],
+                  "host": [
+                    "auth",
+                    "quiltt",
+                    "io"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"<string>\",\n  \"uuid\": \"<string>\",\n  \"email\": \"<email>\",\n  \"metadata\": {\n    \"key_0\": 6682,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97afec18-9ff9-4bc0-9e92-b97e125668eb",
+          "name": "Verify Session Token",
+          "request": {
+            "name": "Verify Session Token",
+            "description": {
+              "content": "Verify a session token. Pass the session token itself as the Bearer credential. Served from https://auth.quiltt.io/v1.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v1",
+                "users",
+                "session"
+              ],
+              "host": [
+                "auth",
+                "quiltt",
+                "io"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "77b6c1fd-612a-44b2-a1be-bdca12077c72",
+              "name": "The token is valid; returns its claims.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "users",
+                    "session"
+                  ],
+                  "host": [
+                    "auth",
+                    "quiltt",
+                    "io"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"userId\": \"string\",\n  \"environmentId\": \"string\",\n  \"expiration\": 501,\n  \"expiresAt\": \"2009-04-01T14:31:33.755Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bfe816d-1681-4e5d-bff1-e856e6e83c90",
+              "name": "The token is invalid, revoked, or expired.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "users",
+                    "session"
+                  ],
+                  "host": [
+                    "auth",
+                    "quiltt",
+                    "io"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "135bc244-e995-4dd6-8994-26539796ef3c",
+          "name": "Revoke Session Token",
+          "request": {
+            "name": "Revoke Session Token",
+            "description": {
+              "content": "Revoke a session token. Pass the token to revoke as the Bearer credential. Served from https://auth.quiltt.io/v1.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v1",
+                "users",
+                "sessions",
+                "revoke"
+              ],
+              "host": [
+                "auth",
+                "quiltt",
+                "io"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "07a09e95-ab32-4277-8bd1-75208ac9d6ad",
+              "name": "The token was revoked.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "users",
+                    "sessions",
+                    "revoke"
+                  ],
+                  "host": [
+                    "auth",
+                    "quiltt",
+                    "io"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.quiltt.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3dc5e05f-6297-458b-a932-129510cbef4c",
+    "name": "Quiltt Admin & Auth REST Connections Session Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Quiltt is a hybrid API platform. This REST specification covers the administrative and authentication surfaces used to manage Profiles, Connections, Session Tokens, and Webhooks. End-user financial data (accounts, balances, transactions, holdings, statements) is read through the separate GraphQL Data API at https://api.quiltt.io/v1/graphql. Admin endpoints are authenticated with your Quiltt API Secret Key (Bearer). Session Token endpoints live on the auth host.\n\nContact Support:\n Name: Quiltt Support\n Email: support@quiltt.io",
+      "type": "text/plain"
+    }
+  }
+}

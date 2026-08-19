@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quiltt Admin & Auth REST Connections API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId/connections",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List the Connections belonging to a Profile."
+        },
+        {
+          "info": {
+            "name": "Get Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId/connections/:connectionId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "The Connection ID."
+              }
+            ]
+          },
+          "docs": "Get Connection"
+        },
+        {
+          "info": {
+            "name": "Delete Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.quiltt.io/v1/profiles/:profileId/connections/:connectionId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "The Connection ID."
+              }
+            ]
+          },
+          "docs": "Disconnect and remove a Connection, stopping Quiltt from syncing data from the underlying aggregator source."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,579 @@
+{
+  "item": [
+    {
+      "id": "75f8a916-0ab3-4387-9196-fe84731a3a0d",
+      "name": "Profiles",
+      "description": {
+        "content": "Manage end-user Profiles.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "165a6464-152c-42e4-b686-cceb96abd553",
+          "name": "List Profiles",
+          "request": {
+            "name": "List Profiles",
+            "description": {
+              "content": "Retrieve a paginated list of Profiles in the environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23a0debe-4462-4ab4-9bc4-859a3a43619e",
+              "name": "A list of Profiles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"profiles\": [\n    {\n      \"id\": \"p_17KTMuJseY4Cx2LcbgKA7wU\",\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"SCT6ZQ@JRyTqDlETUOYSzsJRl.tjf\",\n      \"phone\": \"string\",\n      \"birthday\": \"2023-06-19\",\n      \"address\": {\n        \"key_0\": 7483.495238417093,\n        \"key_1\": true\n      },\n      \"metadata\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      },\n      \"connectionIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdAt\": \"1989-12-21T16:15:45.455Z\",\n      \"updatedAt\": \"1957-09-14T05:52:58.918Z\"\n    },\n    {\n      \"id\": \"p_17KTMuJseY4Cx2LcbgKA7wU\",\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"REa75nffJkFVH@X.bu\",\n      \"phone\": \"string\",\n      \"birthday\": \"1976-05-06\",\n      \"address\": {\n        \"key_0\": 6904.239582213828\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true,\n        \"key_2\": false,\n        \"key_3\": 9658.696139211504\n      },\n      \"connectionIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdAt\": \"1959-05-03T09:28:43.123Z\",\n      \"updatedAt\": \"2006-03-07T04:21:46.173Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23561237-a606-4db8-89d4-e3976efb3ec6",
+          "name": "Create Profile",
+          "request": {
+            "name": "Create Profile",
+            "description": {
+              "content": "Create a new Profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"birthday\": \"<date>\",\n  \"address\": {\n    \"key_0\": 8749.573136148849,\n    \"key_1\": 2499.5547009117736\n  },\n  \"metadata\": {\n    \"key_0\": 2063,\n    \"key_1\": 6911.967443966471\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b5f40294-7fa3-4d46-a82e-15607b521bbb",
+              "name": "The created Profile.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"birthday\": \"<date>\",\n  \"address\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  },\n  \"metadata\": {\n    \"key_0\": 764.7519401247838,\n    \"key_1\": 8992.574460948164,\n    \"key_2\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"p_17KTMuJseY4Cx2LcbgKA7wU\",\n  \"uuid\": \"string\",\n  \"name\": \"string\",\n  \"email\": \"QEWBm@TkNIDILtwqrxjyGL.ps\",\n  \"phone\": \"string\",\n  \"birthday\": \"1989-06-05\",\n  \"address\": {\n    \"key_0\": \"string\"\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"connectionIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"1991-06-27T13:03:57.073Z\",\n  \"updatedAt\": \"1988-12-25T19:41:18.780Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56680b72-202f-4b4f-b6aa-4b55a33bd3d9",
+          "name": "Get Profile",
+          "request": {
+            "name": "Get Profile",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) The Profile ID (e.g. p_17KTMuJseY4Cx2LcbgKA7wU) or your UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60ab0e23-1a78-41da-b814-21b72d4835b3",
+              "name": "The requested Profile.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The Profile ID (e.g. p_17KTMuJseY4Cx2LcbgKA7wU) or your UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"p_17KTMuJseY4Cx2LcbgKA7wU\",\n  \"uuid\": \"string\",\n  \"name\": \"string\",\n  \"email\": \"QEWBm@TkNIDILtwqrxjyGL.ps\",\n  \"phone\": \"string\",\n  \"birthday\": \"1989-06-05\",\n  \"address\": {\n    \"key_0\": \"string\"\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"connectionIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"1991-06-27T13:03:57.073Z\",\n  \"updatedAt\": \"1988-12-25T19:41:18.780Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e5224ce-bb57-4606-a05a-285e2d859548",
+              "name": "Profile not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The Profile ID (e.g. p_17KTMuJseY4Cx2LcbgKA7wU) or your UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4b2d549-4073-412e-a66e-087d7661f17d",
+          "name": "Update Profile",
+          "request": {
+            "name": "Update Profile",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) The Profile ID (e.g. p_17KTMuJseY4Cx2LcbgKA7wU) or your UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"birthday\": \"<date>\",\n  \"address\": {\n    \"key_0\": 8749.573136148849,\n    \"key_1\": 2499.5547009117736\n  },\n  \"metadata\": {\n    \"key_0\": 2063,\n    \"key_1\": 6911.967443966471\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb00b2f6-d577-43b4-934f-b3672badede3",
+              "name": "The updated Profile.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The Profile ID (e.g. p_17KTMuJseY4Cx2LcbgKA7wU) or your UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"birthday\": \"<date>\",\n  \"address\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  },\n  \"metadata\": {\n    \"key_0\": 764.7519401247838,\n    \"key_1\": 8992.574460948164,\n    \"key_2\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"p_17KTMuJseY4Cx2LcbgKA7wU\",\n  \"uuid\": \"string\",\n  \"name\": \"string\",\n  \"email\": \"QEWBm@TkNIDILtwqrxjyGL.ps\",\n  \"phone\": \"string\",\n  \"birthday\": \"1989-06-05\",\n  \"address\": {\n    \"key_0\": \"string\"\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"connectionIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"1991-06-27T13:03:57.073Z\",\n  \"updatedAt\": \"1988-12-25T19:41:18.780Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "acb7cdbf-2ce4-45da-bac9-db63110ed507",
+          "name": "Delete Profile",
+          "request": {
+            "name": "Delete Profile",
+            "description": {
+              "content": "Permanently delete a Profile and its associated data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) The Profile ID (e.g. p_17KTMuJseY4Cx2LcbgKA7wU) or your UUID."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0dfbd96f-437d-472c-b1f9-acec5d7aab09",
+              "name": "Profile deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The Profile ID (e.g. p_17KTMuJseY4Cx2LcbgKA7wU) or your UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.quiltt.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c7fe5494-ccd0-4154-b20d-e4f73c9d32ca",
+    "name": "Quiltt Admin & Auth REST Connections Profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Quiltt is a hybrid API platform. This REST specification covers the administrative and authentication surfaces used to manage Profiles, Connections, Session Tokens, and Webhooks. End-user financial data (accounts, balances, transactions, holdings, statements) is read through the separate GraphQL Data API at https://api.quiltt.io/v1/graphql. Admin endpoints are authenticated with your Quiltt API Secret Key (Bearer). Session Token endpoints live on the auth host.\n\nContact Support:\n Name: Quiltt Support\n Email: support@quiltt.io",
+      "type": "text/plain"
+    }
+  }
+}

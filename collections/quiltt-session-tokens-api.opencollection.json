@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Quiltt Admin & Auth REST Connections Session Tokens API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Session Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Issue Session Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.quiltt.io/v1/users/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issue a Profile-scoped JWT session token. Authenticated with your API Secret Key. Served from https://auth.quiltt.io/v1. Rate limited to 10 per hour and 20 per day per Profile."
+        },
+        {
+          "info": {
+            "name": "Verify Session Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.quiltt.io/v1/users/session",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Verify a session token. Pass the session token itself as the Bearer credential. Served from https://auth.quiltt.io/v1."
+        },
+        {
+          "info": {
+            "name": "Revoke Session Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.quiltt.io/v1/users/sessions/revoke",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Revoke a session token. Pass the token to revoke as the Bearer credential. Served from https://auth.quiltt.io/v1."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
