@@ -36,6 +36,12 @@ apis:
   tags:
   - GraphQL
   - Financial Data
+  - Account
+  - Transaction
+  - Connections
+  tags_raw:
+  - GraphQL
+  - Financial Data
   - Accounts
   - Transactions
   - Connections
@@ -121,6 +127,8 @@ apis:
   humanURL: https://www.quiltt.dev/api/graphql
   baseURL: https://api.quiltt.io/v1/graphql
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
