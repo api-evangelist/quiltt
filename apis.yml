@@ -7,6 +7,18 @@ description: Quiltt is a fintech data platform and abstraction layer over open-b
   end-user financial data (profiles, connections, accounts, balances, transactions,
   investment holdings, statements) plus a REST Admin/Auth API for profiles, connections,
   session tokens, and webhooks, and an embeddable Connector UI for account linking.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
