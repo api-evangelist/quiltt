@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Quiltt Admin & Auth REST Connections API
   description: Quiltt is a hybrid API platform. This REST specification covers the administrative and authentication surfaces used to manage Profiles, Connections, Session Tokens, and Webhooks. End-user financial data (accounts, balances, transactions, holdings, statements) is read through the separate GraphQL Data API at https://api.quiltt.io/v1/graphql. Admin endpoints are authenticated with your Quiltt API Secret Key (Bearer). Session Token endpoints live on the auth host.

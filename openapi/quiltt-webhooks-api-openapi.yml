@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Quiltt Admin & Auth REST Connections Webhooks API
+  title: Quiltt Admin & Auth REST Webhooks API
   description: Quiltt is a hybrid API platform. This REST specification covers the administrative and authentication surfaces used to manage Profiles, Connections, Session Tokens, and Webhooks. End-user financial data (accounts, balances, transactions, holdings, statements) is read through the separate GraphQL Data API at https://api.quiltt.io/v1/graphql. Admin endpoints are authenticated with your Quiltt API Secret Key (Bearer). Session Token endpoints live on the auth host.
   termsOfService: https://www.quiltt.io/legal/terms
   contact:
@@ -84,6 +84,26 @@ paths:
           description: Webhook subscription deleted.
 components:
   schemas:
+    WebhookInput:
+      type: object
+      required:
+      - url
+      - events
+      properties:
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+            - profile.created
+            - connection.synced.successful
+            - connection.synced.successful.initial
+            - connection.synced.successful.historical
+            - connection.synced.errored.repairable
+            - account.verified
     Webhook:
       type: object
       properties:
@@ -105,26 +125,6 @@ components:
         createdAt:
           type: string
           format: date-time
-    WebhookInput:
-      type: object
-      required:
-      - url
-      - events
-      properties:
-        url:
-          type: string
-          format: uri
-        events:
-          type: array
-          items:
-            type: string
-            enum:
-            - profile.created
-            - connection.synced.successful
-            - connection.synced.successful.initial
-            - connection.synced.successful.historical
-            - connection.synced.errored.repairable
-            - account.verified
   securitySchemes:
     apiSecretKey:
       type: http
