@@ -84,26 +84,6 @@ paths:
           description: Webhook subscription deleted.
 components:
   schemas:
-    WebhookInput:
-      type: object
-      required:
-      - url
-      - events
-      properties:
-        url:
-          type: string
-          format: uri
-        events:
-          type: array
-          items:
-            type: string
-            enum:
-            - profile.created
-            - connection.synced.successful
-            - connection.synced.successful.initial
-            - connection.synced.successful.historical
-            - connection.synced.errored.repairable
-            - account.verified
     Webhook:
       type: object
       properties:
@@ -125,6 +105,26 @@ components:
         createdAt:
           type: string
           format: date-time
+    WebhookInput:
+      type: object
+      required:
+      - url
+      - events
+      properties:
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+            - profile.created
+            - connection.synced.successful
+            - connection.synced.successful.initial
+            - connection.synced.successful.historical
+            - connection.synced.errored.repairable
+            - account.verified
   securitySchemes:
     apiSecretKey:
       type: http

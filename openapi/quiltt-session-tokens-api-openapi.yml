@@ -79,6 +79,21 @@ paths:
           description: The token was revoked.
 components:
   schemas:
+    SessionTokenInput:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: An existing Profile ID to scope the token to.
+        uuid:
+          type: string
+          description: Your external identifier; creates a Profile if none exists.
+        email:
+          type: string
+          format: email
+        metadata:
+          type: object
+          additionalProperties: true
     SessionToken:
       type: object
       properties:
@@ -95,21 +110,6 @@ components:
         expiresAt:
           type: string
           format: date-time
-    SessionTokenInput:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: An existing Profile ID to scope the token to.
-        uuid:
-          type: string
-          description: Your external identifier; creates a Profile if none exists.
-        email:
-          type: string
-          format: email
-        metadata:
-          type: object
-          additionalProperties: true
   securitySchemes:
     apiSecretKey:
       type: http
