@@ -120,6 +120,27 @@ paths:
           description: Profile deleted.
 components:
   schemas:
+    ProfileInput:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        birthday:
+          type: string
+          format: date
+        address:
+          type: object
+          additionalProperties: true
+        metadata:
+          type: object
+          additionalProperties: true
     Profile:
       type: object
       properties:
@@ -156,27 +177,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    ProfileInput:
-      type: object
-      properties:
-        uuid:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        birthday:
-          type: string
-          format: date
-        address:
-          type: object
-          additionalProperties: true
-        metadata:
-          type: object
-          additionalProperties: true
   securitySchemes:
     apiSecretKey:
       type: http
