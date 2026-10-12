@@ -1,0 +1,287 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://zapier.com/apps/quiltt/integrations
+- https://composio.dev/toolkits/quiltt
+checked:
+- https://composio.dev/toolkits/quiltt
+- https://monid.ai/tools/quiltt
+- https://n8n.io/integrations/quiltt/
+- https://zapier.com/apps/quiltt/integrations
+summary: null
+marketplace_apps:
+- marketplace: zapier
+  channel: ipaas-listing
+  app: quiltt
+  url: https://zapier.com/apps/quiltt/integrations
+  external_url: https://www.quiltt.io/
+  partner_tier: BRONZE
+  triggers:
+  - key: connection_created
+    label: Connection Created
+  - key: person_changed
+    label: Profile Changed
+  - key: person_created
+    label: Profile Created
+  actions: []
+  searches: []
+- marketplace: composio
+  channel: agent-gateway
+  app: quiltt
+  url: https://composio.dev/toolkits/quiltt
+  identity: action-prefix
+  actions:
+  - key: QUILTT_CREATE_PROFILE
+  - key: QUILTT_CREATE_WEBHOOK_SUBSCRIPTION
+  - key: QUILTT_DELETE_WEBHOOK_SUBSCRIPTION
+  - key: QUILTT_GET_PROFILE
+  - key: QUILTT_LIST_FINICITY_REMOTE_DATA
+  - key: QUILTT_LIST_PROFILES
+  - key: QUILTT_LIST_WEBHOOK_SUBSCRIPTIONS
+  - key: QUILTT_SEARCH_INSTITUTIONS
+  - key: QUILTT_UPDATE_PROFILE
+  - key: QUILTT_UPDATE_WEBHOOK_SUBSCRIPTION
+edges:
+- partner_name: PushAlert - Web Push Notifications
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/pushalert-web-push-notifications
+  direction: third-party
+  category: Marketing
+  partner_url: https://pushalert.co/
+- partner_name: Google Sheets
+  partner: google-sheets
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/google-sheets
+  direction: third-party
+  category: Google
+  partner_url: http://sheets.google.com/
+- partner_name: MailSlurp Email Plugin
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/mailslurp-email-plugin
+  direction: third-party
+  category: Email
+  partner_url: https://www.mailslurp.com/zapier/
+- partner_name: Gmail
+  partner: gmail
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/gmail
+  direction: third-party
+  category: Email
+  partner_url: https://mail.google.com/
+- partner_name: Google Calendar
+  partner: google-calendar
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/google-calendar
+  direction: third-party
+  category: Calendar
+  partner_url: https://calendar.google.com/
+- partner_name: Google Drive
+  partner: google-drive
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/google-drive
+  direction: third-party
+  category: File Management & Storage
+  partner_url: https://www.google.com/drive/
+- partner_name: HubSpot
+  partner: hubspot
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/hubspot
+  direction: third-party
+  category: Marketing Automation
+  partner_url: http://www.hubspot.com/
+- partner_name: Facebook Lead Ads
+  partner: facebook-lead-ads
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/facebook-lead-ads
+  direction: third-party
+  category: Ads & Conversion
+  partner_url: https://www.facebook.com/business/ads/lead-ads
+- partner_name: Google Forms
+  partner: google-forms
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/google-forms
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: http://google.com/
+- partner_name: Mailchimp
+  partner: mailchimp
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/mailchimp
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://mailchimp.com/
+- partner_name: Microsoft Outlook
+  partner: microsoft-outlook
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/microsoft-outlook
+  direction: third-party
+  category: Calendar
+  partner_url: https://outlook.live.com/
+- partner_name: Gravity Forms
+  partner: gravity-forms
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/gravity-forms
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: https://www.gravityforms.com/?utm_campaign=partners&utm_source=zapier-listing-learn-more&utm_medium=free-placement
+- partner_name: Google Ads
+  partner: google-ads
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/google-ads
+  direction: third-party
+  category: Ads & Conversion
+  partner_url: https://ads.google.com/
+- partner_name: ActiveCampaign
+  partner: activecampaign
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/activecampaign
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://www.activecampaign.com/?utm_source=unpaid_syndication_website&utm_medium=referral&utm_campaign=zapier_listing
+- partner_name: Facebook Pages
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/facebook-pages
+  direction: third-party
+  category: Facebook
+  partner_url: https://facebook.com/
+- partner_name: LinkedIn Ads
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/linkedin-ads
+  direction: third-party
+  category: Ads & Conversion
+  partner_url: https://www.linkedin.com/
+- partner_name: Bitly
+  partner: bitly
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/bitly
+  direction: third-party
+  category: URL Shortener
+  partner_url: https://bitly.com/?utm_source=zapier&utm_medium=applications&utm_campaign=zapier_integration&utm_content=
+- partner_name: GPT-trainer
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/gpt-trainer
+  direction: third-party
+  category: AI Assistants
+  partner_url: https://gpt-trainer.com/
+- partner_name: ilert
+  partner: ilert
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/ilert
+  direction: third-party
+  category: Server Monitoring
+  partner_url: https://www.ilert.com/
+- partner_name: Hume AI
+  partner: hume-ai
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/hume-ai-ca228898
+  direction: third-party
+  category: AI Models
+  partner_url: https://www.hume.ai/
+- partner_name: PromptHub
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/quiltt/integrations/prompthub
+  direction: third-party
+  category: AI Models
+  partner_url: https://www.prompthub.us/
+templates:
+- title: Send new user profiles created in Quiltt to channels in Slack
+  url: https://zapier.com/apps/quiltt/integrations/slack/1169789/send-new-user-profiles-created-in-quiltt-to-channels-in-slack
+  apps:
+  - quiltt
+  - slack
+- title: Create rows in Google Sheets for new Quiltt connections
+  url: https://zapier.com/apps/google-sheets/integrations/quiltt/1259267/create-rows-in-google-sheets-for-new-quiltt-connections
+  apps:
+  - quiltt
+  - google-sheets
+template_total: 2
