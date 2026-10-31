@@ -1,4 +1,4 @@
-# Quiltt (quiltt)
+# Quiltt
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,137 +66,129 @@
 
 Quiltt is a fintech data platform and abstraction layer over open-banking aggregators like Plaid, MX, and Finicity. It exposes a unified GraphQL API for reading end-user financial data (profiles, connections, accounts, balances, transactions, investment holdings, statements) plus a REST Admin/Auth API for profiles, connections, session tokens, and webhooks, and an embeddable Connector UI for account linking.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/quiltt/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/quiltt/refs/heads/main/apis.yml)
+**Areas:** Fintech · Open Banking · Financial Data · Aggregation · GraphQL
 
-## Tags
+## Quiltt on APIs.io
 
-- Fintech
-- Open Banking
-- Financial Data
-- Aggregation
-- GraphQL
+Everything profiled for Quiltt is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/quiltt/](https://apis.io/providers/quiltt/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-07-01
-- **Modified:** 2026-07-01
+- [Quiltt GraphQL Data API](https://apis.io/apis/quiltt/quiltt-graphql-data-api/) — Single GraphQL endpoint for reading an end-user's unified financial data - Profile, Connections, Accounts, Balances, Account Owners and Numbers,…
+- [Quiltt Connections API](https://apis.io/apis/quiltt/quiltt-connections-api/) — Manage a Profile's aggregator Connections.
+- [Quiltt Profiles API](https://apis.io/apis/quiltt/quiltt-profiles-api/) — Manage end-user Profiles.
+- [Quiltt Session Tokens API](https://apis.io/apis/quiltt/quiltt-session-tokens-api/) — Issue, verify, and revoke Profile-scoped session tokens.
+- [Quiltt Webhooks API](https://apis.io/apis/quiltt/quiltt-webhooks-api/) — Manage webhook subscriptions for real-time events.
 
-## APIs
+### Published properties
 
-### Quiltt GraphQL Data API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Single GraphQL endpoint for reading an end-user's unified financial data - Profile, Connections, Accounts, Balances, Account Owners and Numbers, Transactions, Investment Holdings, and Statements - authenticated with a Bearer session token. Supports queries, mutations, and subscriptions.
+#### GraphQL (1)
 
-- **Human URL:** [https://www.quiltt.dev/api/graphql](https://www.quiltt.dev/api/graphql)
-- **Base URL:** `https://api.quiltt.io/v1/graphql`
+GraphQL schemas.
 
-#### Tags
+- [Quiltt GraphQL Data API](https://apis.io/graphqls/quiltt/quiltt-graphql/)
 
-- GraphQL
-- Financial Data
-- Accounts
-- Transactions
-- Connections
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://www.quiltt.dev/api/graphql)
-- [API Reference](https://www.quiltt.dev/api-reference/graphql)
-- [GraphQL](graphql/quiltt-graphql.md) — [GraphQL Specification](https://spec.graphql.org/)
-- [GraphQL Schema](graphql/quiltt-schema.graphql) — [GraphQL Specification](https://spec.graphql.org/)
+- [Quiltt Agentic Access](https://apis.io/agentic-access/quiltt/quiltt-agentic-access/)
 
-### Quiltt Profiles API
+#### Collections (5)
 
-REST Admin endpoints to list, create, retrieve, update, and delete Profiles - the container for an end-user's identity (name, email, phone, birthday, address, custom metadata) and their linked financial Connections.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://www.quiltt.dev/api/profiles](https://www.quiltt.dev/api/profiles)
-- **Base URL:** `https://api.quiltt.io/v1`
+- [Quiltt Admin & Auth REST API](https://apis.io/collections/quiltt/open-quiltt/)
+- [Quiltt Admin & Auth REST Connections API](https://apis.io/collections/quiltt/open-quiltt-connections-api/)
+- [Quiltt Admin & Auth REST Connections Profiles API](https://apis.io/collections/quiltt/open-quiltt-profiles-api/)
+- [Quiltt Admin & Auth REST Connections Session Tokens API](https://apis.io/collections/quiltt/open-quiltt-session-tokens-api/)
+- [Quiltt Admin & Auth REST Connections Webhooks API](https://apis.io/collections/quiltt/open-quiltt-webhooks-api/)
 
-#### Tags
+#### Security (2)
 
-- Profiles
-- Users
-- Admin
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Quiltt Authentication](https://apis.io/security/quiltt/quiltt-authentication/)
+- [Quiltt Domain Security](https://apis.io/security/quiltt/quiltt-domain-security/)
 
-- [Documentation](https://www.quiltt.dev/api/profiles)
-- [OpenAPI](openapi/quiltt-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/quiltt.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/quiltt.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### Quiltt Connections API
+Published plans, tiers and prices.
 
-REST Admin endpoints to list, retrieve, and manage a Profile's Connections - the links to underlying aggregator sources (Plaid Item, MX Member, Finicity Institution Login) that back the accounts and transactions surfaced through the GraphQL API.
+- [Quiltt Plans Pricing](https://apis.io/plans/quiltt/quiltt-plans-pricing/)
 
-- **Human URL:** [https://www.quiltt.dev/api/core-resources/connections](https://www.quiltt.dev/api/core-resources/connections)
-- **Base URL:** `https://api.quiltt.io/v1`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Connections
-- Aggregators
-- Admin
+- [Quiltt Rate Limits](https://apis.io/rate-limits/quiltt/quiltt-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://www.quiltt.dev/api/core-resources/connections)
-- [OpenAPI](openapi/quiltt-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/quiltt.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/quiltt.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Quiltt Session Tokens API
+- [Quiltt Finops](https://apis.io/finops/quiltt/quiltt-finops/)
 
-REST Auth endpoints to issue, verify, and revoke short-lived JWT session tokens scoped to a single Profile. Session tokens authenticate the Connector and end-user calls to the GraphQL Data API.
+## Where to find this API
 
-- **Human URL:** [https://www.quiltt.dev/authentication/issuing-session-tokens](https://www.quiltt.dev/authentication/issuing-session-tokens)
-- **Base URL:** `https://auth.quiltt.io/v1`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Authentication
-- Session Tokens
-- Auth
-
-#### Properties
-
-- [Documentation](https://www.quiltt.dev/authentication/issuing-session-tokens)
-- [Documentation](https://www.quiltt.dev/authentication/managing-session-tokens)
-- [OpenAPI](openapi/quiltt-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/quiltt.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/quiltt.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Quiltt Webhooks API
-
-REST Admin endpoints to create, list, retrieve, and delete webhook subscriptions that deliver real-time events such as profile.created, connection.synced.successful, and account.verified to your endpoints.
-
-- **Human URL:** [https://www.quiltt.dev/webhooks](https://www.quiltt.dev/webhooks)
-- **Base URL:** `https://api.quiltt.io/v1`
-
-#### Tags
-
-- Webhooks
-- Events
-- Real Time
-
-#### Properties
-
-- [Documentation](https://www.quiltt.dev/webhooks)
-- [OpenAPI](openapi/quiltt-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/quiltt.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/quiltt.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/quiltt)
-- [LinkedIn](https://www.linkedin.com/company/quiltt)
 - [Website](https://www.quiltt.io/)
 - [Documentation](https://www.quiltt.dev)
-- [Plans](plans/quiltt-plans-pricing.yml)
-- [Rate Limits](rate-limits/quiltt-rate-limits.yml)
-- [Fin Ops](finops/quiltt-finops.yml)
+- [Blog](https://www.quiltt.io/blog)
+- [GitHub](https://github.com/quiltt)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 51.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 9.4** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/quiltt/](https://apis.io/providers/quiltt/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Quiltt: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/quiltt/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
